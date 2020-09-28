@@ -11,21 +11,29 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
 @Entity
 @Table(name = "clientes")
-public class Cliente {
-	
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+public class Cliente implements Identifiable<Long> {
+
 	@Id
 	@GeneratedValue
+	@EqualsAndHashCode.Include
 	private Long id;
-	
+
 	@Column(length = 60, nullable = false)
 	private String nome;
-	
+
 	@OneToMany
-	@JoinColumn(name="cliente_id")
+	@JoinColumn(name = "cliente_id")
 	private Set<Veiculo> veiculos = new HashSet<Veiculo>();
-	
-	
-	
+
 }

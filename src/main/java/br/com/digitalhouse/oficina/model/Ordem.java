@@ -1,9 +1,12 @@
 package br.com.digitalhouse.oficina.model;
 
-import javax.persistence.Column;
+import java.math.BigDecimal;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -12,28 +15,27 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "veiculos")
+@Table(name = "ordens")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Veiculo implements Identifiable<Long> {
-
+public class Ordem implements Identifiable<Long> {
+	
 	@Id
 	@GeneratedValue
-	@EqualsAndHashCode.Include
 	private Long id;
-
-	@Column(length = 7, nullable = false)
-	private String placa;
-
-	@Column(length = 30, nullable = false)
-	private String cor;
-
-	@Column(length = 30, nullable = false)
-	private String modelo;
-
-	@Column(length = 30, nullable = false)
-	private String marca;
+	
+	@OneToOne
+	@JoinColumn(name = "cliente_id")
+	private Cliente cliente;
+	
+	@OneToOne
+	@JoinColumn(name = "veiculo_id")
+	private Veiculo veiculo;
+	
+	private String descricao;
+	
+	private BigDecimal valor;
 
 }
