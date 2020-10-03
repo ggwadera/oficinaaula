@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -36,6 +37,7 @@ public class Cliente implements Identifiable<Long>, Serializable {
 	@EqualsAndHashCode.Include
 	private Long id;
 
+	@NotBlank
 	@Column(length = 60, nullable = false)
 	private String nome;
 

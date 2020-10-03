@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -30,15 +31,19 @@ public class Veiculo implements Identifiable<Long>, Serializable {
 	@EqualsAndHashCode.Include
 	private Long id;
 
+	@NotBlank
 	@Column(length = 7, nullable = false)
 	private String placa;
 
+	@NotBlank
 	@Column(length = 30, nullable = false)
 	private String cor;
 
+	@NotBlank
 	@Column(length = 30, nullable = false)
 	private String modelo;
 
+	@NotBlank
 	@Column(length = 30, nullable = false)
 	private String marca;
 	
