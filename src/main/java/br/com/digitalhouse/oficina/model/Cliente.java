@@ -1,5 +1,7 @@
 package br.com.digitalhouse.oficina.model;
 
+import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,7 +27,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Cliente implements Identifiable<Long> {
+public class Cliente implements Identifiable<Long>, Serializable {
+	
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue
@@ -35,5 +42,11 @@ public class Cliente implements Identifiable<Long> {
 	@OneToMany
 	@JoinColumn(name = "cliente_id")
 	private Set<Veiculo> veiculos = new HashSet<Veiculo>();
+	
+	@CreationTimestamp
+	private LocalDateTime createdAt;
+	
+	@UpdateTimestamp
+	private LocalDateTime updatedAt;
 
 }
