@@ -16,7 +16,6 @@ public class AbstractService<T extends Identifiable<ID>, ID> {
 	}
 
 	public T create(T object) {
-		object.setId(null);
 		return this.repository.save(object);
 	}
 

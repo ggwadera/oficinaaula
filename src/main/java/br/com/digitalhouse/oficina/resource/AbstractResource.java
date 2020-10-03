@@ -3,6 +3,8 @@ package br.com.digitalhouse.oficina.resource;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,14 +27,14 @@ public abstract class AbstractResource<T extends Identifiable<ID>, ID> {
 	}
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Void> create(@RequestBody T object) {
+	public ResponseEntity<Void> create(@RequestBody @Valid T object) {
 		object = this.service.create(object);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(object.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
 
 	@PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Void> update(@PathVariable ID id, @RequestBody T object) {
+	public ResponseEntity<Void> update(@PathVariable ID id, @RequestBody @Valid T object) {
 		this.service.update(id, object);
 		return ResponseEntity.noContent().build();
 	}
